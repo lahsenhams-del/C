@@ -1,59 +1,32 @@
-keyframes: {
-  "fade-in": {
-    "0%": { opacity: "0", transform: "translateY(20px)" },
-    "100%": { opacity: "1", transform: "translateY(0)" }
-  },
-  "scale-in": {
-    "0%": { opacity: "0", transform: "scale(0.9)" },
-    "100%": { opacity: "1", transform: "scale(1)" }
-  },
-  float: {
-    "0%, 100%": { transform: "translateY(0)" },
-    "50%": { transform: "translateY(-20px)" }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 20% 96%;
+    --foreground: 0 0% 10%;
+    --primary: 348 83% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 35 20% 96%;
+    --accent: 43 74% 66%;
+    --japanese-red: 348 83% 47%;
+    --dark-bg: 0 0% 10%;
+    --cream: 35 20% 96%;
+    --gold: 43 74% 66%;
+    /* ... المزيد من المتغيرات */
   }
-},
-animation: {
-  "fade-in": "fade-in 0.6s ease-out",
-  "scale-in": "scale-in 0.5s ease-out",
-  float: "float 3s ease-in-out infinite"
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
 }
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { Button } from "./ui/button";
-
-const menuItems = [
-  {
-    name: "Nigiri Selection",
-    nameAr: "تشكيلة نيجيري",
-    description: "تشكيلة فاخرة من السالمون والتونة والجمبري الطازج",
-    price: "120",
-    image: nigiriImage,
-    popular: true
-  },
-  // ... المزيد
-];
-
-export const Menu = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  return (
-    <section ref={ref} className="py-24 bg-white">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {menuItems.map((item, index) => (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            className="group hover:-translate-y-2"
-          >
-            {/* ... محتوى الكارد */}
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-};
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
@@ -101,33 +74,78 @@ export const Hero = () => {
     </section>
   );
 };
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { Button } from "./ui/button";
 
-@layer base {
-  :root {
-    --background: 35 20% 96%;
-    --foreground: 0 0% 10%;
-    --primary: 348 83% 47%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 35 20% 96%;
-    --accent: 43 74% 66%;
-    --japanese-red: 348 83% 47%;
-    --dark-bg: 0 0% 10%;
-    --cream: 35 20% 96%;
-    --gold: 43 74% 66%;
-    /* ... المزيد من المتغيرات */
-  }
+const menuItems = [
+  {
+    name: "Nigiri Selection",
+    nameAr: "تشكيلة نيجيري",
+    description: "تشكيلة فاخرة من السالمون والتونة والجمبري الطازج",
+    price: "120",
+    image: nigiriImage,
+    popular: true
+  },
+  // ... المزيد
+];
 
-  body {
-    @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', sans-serif;
+export const Menu = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  return (
+    <section ref={ref} className="py-24 bg-white">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {menuItems.map((item, index) => (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            className="group hover:-translate-y-2"
+          >
+            {/* ... محتوى الكارد */}
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
+keyframes: {
+  "fade-in": {
+    "0%": { opacity: "0", transform: "translateY(20px)" },
+    "100%": { opacity: "1", transform: "translateY(0)" }
+  },
+  "scale-in": {
+    "0%": { opacity: "0", transform: "scale(0.9)" },
+    "100%": { opacity: "1", transform: "scale(1)" }
+  },
+  float: {
+    "0%, 100%": { transform: "translateY(0)" },
+    "50%": { transform: "translateY(-20px)" }
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-  }
+},
+animation: {
+  "fade-in": "fade-in 0.6s ease-out",
+  "scale-in": "scale-in 0.5s ease-out",
+  float: "float 3s ease-in-out infinite"
 }
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
+import { Menu } from "@/components/Menu";
+import { Testimonials } from "@/components/Testimonials";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 
+const Index = () => {
+  return (
+    <div className="min-h-screen">
+      <Hero />
+      <About />
+      <Menu />
+      <Testimonials />
+      <Contact />
+      <Footer />
+    </div>
+  );
+};
